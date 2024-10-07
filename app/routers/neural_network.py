@@ -15,4 +15,5 @@ class PricePredictionRequest(BaseModel):
 @router.post("/predict")
 async def predict_price(data: PricePredictionRequest):
     # здесь будет логика нейронки
-    return {"predicted_price": 12*10**6}
+    # я что-то поменял
+    return {"predicted_price": 15*10**6}
