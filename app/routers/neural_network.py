@@ -16,4 +16,4 @@ class PricePredictionRequest(BaseModel):
 async def predict_price(data: PricePredictionRequest):
     # здесь будет логика нейронки
     # я что-то поменял ещё раз
-    return {"predicted_price": 15*10**6}
+    return {"predicted_price": 15*10**60}
