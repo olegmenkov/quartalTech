@@ -13,9 +13,8 @@
 # @section libraries_routers_apartments Используемые библиотеки/модули
 # - sqlalchemy (https://www.sqlalchemy.org/)
 #   - Набор инструментов для создания БД.
-# - os standard library (https://docs.python.org/3/library/os.html)
-# - dotenv (https://pypi.org/project/python-dotenv/)
-#   - load_dotenv читает системные переменные среды из файла .env
+# - fastapi (https://fastapi.tiangolo.com/)
+#   - Библиотека для создания серверных приложений
 # 
 # @section notes_routers_apartments Заметки
 # - Отсутствуют.

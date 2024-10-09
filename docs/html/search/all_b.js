@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['rooms_0',['rooms',['../classmodels_1_1_apartment.html#a76aff14d5849aa9d95ce8f19172d7fd2',1,'models::Apartment']]],
-  ['root_1',['root',['../namespacemain.html#a453c8a0e297db31a4ab6ae4c23318eef',1,'main']]]
+  ['predict_5fprice_0',['predict_price',['../namespaceneural__network.html#a6c47e32080d27fa6909084b491e0fe05',1,'neural_network']]],
+  ['pricepredictionrequest_1',['PricePredictionRequest',['../classneural__network_1_1_price_prediction_request.html',1,'neural_network']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>QuartalTech: Пространство имен main</title>
+<title>QuartalTech: Пространство имен neural_network</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,108 +86,81 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
 <a href="#func-members">Функции</a> &#124;
 <a href="#var-members">Переменные</a>  </div>
-  <div class="headertitle"><div class="title">Пространство имен main</div></div>
+  <div class="headertitle"><div class="title">Пространство имен neural_network</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Серверное приложение системы о продаже и оценивании квартир  
+<p>Содержит обработчик HTTP запросов для оценки стоимости квартиры.  
 <a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classneural__network_1_1_price_prediction_request.html">PricePredictionRequest</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс запроса на предсказание цены.  <a href="classneural__network_1_1_price_prediction_request.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:aa084faa897769c385a5ba22b31dfc381" id="r_aa084faa897769c385a5ba22b31dfc381"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa084faa897769c385a5ba22b31dfc381">create_tables</a> ()</td></tr>
-<tr class="memdesc:aa084faa897769c385a5ba22b31dfc381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает в БД описанные таблицы  <br /></td></tr>
-<tr class="separator:aa084faa897769c385a5ba22b31dfc381"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a119fe5562430926dcaaaefbc1228474f" id="r_a119fe5562430926dcaaaefbc1228474f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a119fe5562430926dcaaaefbc1228474f">on_startup</a> ()</td></tr>
-<tr class="memdesc:a119fe5562430926dcaaaefbc1228474f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Подписчик события <code>startup</code>  <br /></td></tr>
-<tr class="separator:a119fe5562430926dcaaaefbc1228474f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a453c8a0e297db31a4ab6ae4c23318eef" id="r_a453c8a0e297db31a4ab6ae4c23318eef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a453c8a0e297db31a4ab6ae4c23318eef">root</a> ()</td></tr>
-<tr class="memdesc:a453c8a0e297db31a4ab6ae4c23318eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Главная страница приложения  <br /></td></tr>
-<tr class="separator:a453c8a0e297db31a4ab6ae4c23318eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c47e32080d27fa6909084b491e0fe05" id="r_a6c47e32080d27fa6909084b491e0fe05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c47e32080d27fa6909084b491e0fe05">predict_price</a> (<a class="el" href="classneural__network_1_1_price_prediction_request.html">PricePredictionRequest</a> data)</td></tr>
+<tr class="memdesc:a6c47e32080d27fa6909084b491e0fe05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предсказание цены квартиры.  <br /></td></tr>
+<tr class="separator:a6c47e32080d27fa6909084b491e0fe05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Переменные</h2></td></tr>
-<tr class="memitem:afe63fea7be31b0200b496d08bc6b517d" id="r_afe63fea7be31b0200b496d08bc6b517d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe63fea7be31b0200b496d08bc6b517d">app</a> = FastAPI()</td></tr>
-<tr class="memdesc:afe63fea7be31b0200b496d08bc6b517d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Приложение FastAPI.  <br /></td></tr>
-<tr class="separator:afe63fea7be31b0200b496d08bc6b517d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a697d5d45669a18c3fb2e7ac3ae470b49" id="r_a697d5d45669a18c3fb2e7ac3ae470b49"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a697d5d45669a18c3fb2e7ac3ae470b49">router</a></td></tr>
+<tr class="memdesc:a697d5d45669a18c3fb2e7ac3ae470b49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Настройка пути запроса: /neural_network.  <br /></td></tr>
+<tr class="separator:a697d5d45669a18c3fb2e7ac3ae470b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Серверное приложение системы о продаже и оценивании квартир </p>
+<div class="textblock"><p>Содержит обработчик HTTP запросов для оценки стоимости квартиры. </p>
 </div><h2 class="groupheader">Функции</h2>
-<a id="aa084faa897769c385a5ba22b31dfc381" name="aa084faa897769c385a5ba22b31dfc381"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa084faa897769c385a5ba22b31dfc381">&#9670;&#160;</a></span>create_tables()</h2>
+<a id="a6c47e32080d27fa6909084b491e0fe05" name="a6c47e32080d27fa6909084b491e0fe05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c47e32080d27fa6909084b491e0fe05">&#9670;&#160;</a></span>predict_price()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">create_tables </td>
+          <td class="memname">predict_price </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classneural__network_1_1_price_prediction_request.html">PricePredictionRequest</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Создает в БД описанные таблицы </p>
-
-</div>
-</div>
-<a id="a119fe5562430926dcaaaefbc1228474f" name="a119fe5562430926dcaaaefbc1228474f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a119fe5562430926dcaaaefbc1228474f">&#9670;&#160;</a></span>on_startup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">on_startup </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Подписчик события <code>startup</code> </p>
-<p>Создает таблицы при получении события </p>
-
-</div>
-</div>
-<a id="a453c8a0e297db31a4ab6ae4c23318eef" name="a453c8a0e297db31a4ab6ae4c23318eef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a453c8a0e297db31a4ab6ae4c23318eef">&#9670;&#160;</a></span>root()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">root </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Главная страница приложения </p>
+<p>Предсказание цены квартиры. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Объект с информацией о квартире.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Объект с информацией о цене. </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Переменные</h2>
-<a id="afe63fea7be31b0200b496d08bc6b517d" name="afe63fea7be31b0200b496d08bc6b517d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe63fea7be31b0200b496d08bc6b517d">&#9670;&#160;</a></span>app</h2>
+<a id="a697d5d45669a18c3fb2e7ac3ae470b49" name="a697d5d45669a18c3fb2e7ac3ae470b49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a697d5d45669a18c3fb2e7ac3ae470b49">&#9670;&#160;</a></span>router</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">app = FastAPI()</td>
+          <td class="memname">router</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Приложение FastAPI. </p>
+<b>Инициализатор</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  APIRouter(</div>
+<div class="line"><span class="lineno">    2</span>    prefix=<span class="stringliteral">&quot;/neural_network&quot;</span>,</div>
+<div class="line"><span class="lineno">    3</span>    tags=[<span class="stringliteral">&quot;neural_network&quot;</span>]</div>
+<div class="line"><span class="lineno">    4</span>)</div>
+</div><!-- fragment -->
+<p>Настройка пути запроса: /neural_network. </p>
 
 </div>
 </div>

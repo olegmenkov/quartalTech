@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['заметки_0',['Заметки',['../database_8py.html#notes_database',1,'Заметки'],['../index.html#notes_mainpage',1,'Заметки'],['../main_8py.html#notes_main',1,'Заметки'],['../models_8py.html#notes_models',1,'Заметки'],['../schemas_8py.html#notes_schemas',1,'Заметки']]]
+  ['библиотеки_20модули_0',['библиотеки модули',['../database_8py.html#libraries_database',1,'Используемые библиотеки/модули'],['../main_8py.html#libraries_main',1,'Используемые библиотеки/модули'],['../models_8py.html#libraries_models',1,'Используемые библиотеки/модули'],['../apartments_8py.html#libraries_routers_apartments',1,'Используемые библиотеки/модули'],['../apartments_8py.html#libraries_routers_neural_network',1,'Используемые библиотеки/модули'],['../schemas_8py.html#libraries_schemas',1,'Используемые библиотеки/модули']]]
 ];

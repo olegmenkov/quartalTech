@@ -52,10 +52,13 @@ from app.models import Base
 
 
 async def create_tables():
+    """! Создает в БД описанные таблицы
+    """
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
 
+## Приложение FastAPI 
 app = FastAPI()
 
 app.include_router(apartments.router)
@@ -64,9 +67,15 @@ app.include_router(neural_network.router)
 
 @app.on_event("startup")
 async def on_startup():
+    """! Подписчик события `startup`
+
+    Создает таблицы при получении события
+    """
     await create_tables()
 
 
 @app.get("/")
 async def root():
+    """! Главная страница приложения
+    """
     return {"message": "Welcome to QuartalTek!"}

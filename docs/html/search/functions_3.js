@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['root_0',['root',['../namespacemain.html#a453c8a0e297db31a4ab6ae4c23318eef',1,'main']]]
+  ['predict_5fprice_0',['predict_price',['../namespaceneural__network.html#a6c47e32080d27fa6909084b491e0fe05',1,'neural_network']]]
 ];
