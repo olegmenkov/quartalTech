@@ -14,7 +14,7 @@ class Listing(ListingBase):
     id: int
     apartment_id: int
 
-    class Config:
+    class ConfigDict:
         orm_mode = True
 
 
@@ -33,5 +33,5 @@ class Apartment(ApartmentBase):
     estimated_price: Optional[float] = None
     listings: List[Listing] = []
 
-    class Config:
+    class ConfigDict:
         orm_mode = True
