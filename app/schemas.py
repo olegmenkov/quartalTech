@@ -1,4 +1,4 @@
-""""! @brief Описывает схемы сущностей системы. """
+"""! @brief Описывает схемы сущностей системы."""
 
 ##
 # @file schemas.py 
@@ -30,7 +30,7 @@
 #
 # Copyright (c) 2024 HSE MIEM. All rights reserved.
 
-from pydantic import BaseModel 
+from pydantic import BaseModel, ConfigDict 
 from typing import List, Optional
 
 
@@ -46,6 +46,8 @@ class ListingBase(BaseModel):
 
 
 class ListingCreate(ListingBase):
+    """! Класс создания предложения о квартире
+    """
     pass
 
 
@@ -55,14 +57,14 @@ class Listing(ListingBase):
     Включает в себя информацию о связи с квартирой
     """
 
+    ## Конфигурация ORM для pydantic
+    model_config = ConfigDict(from_attributes=True)
+
     ## Идентификатор записи
     id: int
 
     ## Ссылка на квартиру, которую продают
     apartment_id: int
-
-    class Config:
-        orm_mode = True
 
 
 class ApartmentBase(BaseModel):
@@ -82,6 +84,8 @@ class ApartmentBase(BaseModel):
 
 
 class ApartmentCreate(ApartmentBase):
+    """! Класс создания квартиры
+    """
     pass
 
 
@@ -90,6 +94,9 @@ class Apartment(ApartmentBase):
 
     Содержит свойства квартиры, используемые в системе
     """
+
+    ## Конфигурация ORM для pydantic
+    model_config = ConfigDict(from_attributes=True)
 
     ## Идентификатор записи в БД
     id: int
@@ -100,5 +107,3 @@ class Apartment(ApartmentBase):
     ## Список предложений о продаже данной квартиры
     listings: List[Listing] = []
 
-    class Config:
-        orm_mode = True

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_0',['name',['../classmodels_1_1_apartment.html#ab74e6bf80237ddc4109968cedc58c151',1,'models::Apartment']]]
+  ['model_5fconfig_0',['model_config',['../classschemas_1_1_listing.html#a62e2e5fee3f889814db7290730a28055',1,'schemas.Listing.model_config'],['../classschemas_1_1_apartment.html#a62e2e5fee3f889814db7290730a28055',1,'schemas.Apartment.model_config']]]
 ];

@@ -1,4 +1,4 @@
-""""! @brief Описывает модели БД системы"""
+"""! @brief Описывает модели БД системы."""
 
 ##
 # @file models.py 
@@ -31,6 +31,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
+## Базовый класс БД.
 Base = declarative_base()
 
 
