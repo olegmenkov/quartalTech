@@ -1,25 +1,15 @@
 from fastapi import FastAPI
-from app.routers import apartments, neural_network
-from app.database import engine
-from app.models import Base
+from app.routers import apartments, users, admin, analytics, calculations
 
+app = FastAPI(title="КварталТек", description="Веб-портал для анализа недвижимости.")
 
-async def create_tables():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-
-app = FastAPI()
-
-app.include_router(apartments.router)
-app.include_router(neural_network.router)
-
-
-@app.on_event("startup")
-async def on_startup():
-    await create_tables()
-
+# Подключение роутеров
+app.include_router(users.router, prefix="/users", tags=["Users"])
+app.include_router(apartments.router, prefix="/apartments", tags=["Apartments"])
+app.include_router(admin.router, prefix="/admin", tags=["Admin"])
+app.include_router(analytics.router, prefix="/analytics", tags=["Analytics"])
+app.include_router(calculations.router, prefix="/calculate", tags=["Calculations"])
 
 @app.get("/")
-async def root():
-    return {"message": "Welcome to QuartalTek!"}
+def root():
+    return {"message": "Welcome to КварталТек!"}

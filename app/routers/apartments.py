@@ -1,26 +1,27 @@
-from typing import List
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-from app import models, schemas, database
+from app.auth import get_admin_user
+from app.models import Apartment
+from app.schemas import ApartmentResponse, ApartmentCreate
+from app.dependencies import get_db
 
-router = APIRouter(
-    prefix="/apartments",
-    tags=["apartments"]
-)
+router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.Apartment])
-async def get_apartments(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(database.get_db)):
-    result = await db.execute(select(models.Apartment).offset(skip).limit(limit))
-    return result.scalars().all()
+# Получить список квартир
+@router.get("/", response_model=list[ApartmentResponse])
+def list_apartments(filter: str = None, db: Session = Depends(get_db)):
+    query = db.query(Apartment)
+    if filter:
+        query = query.filter(Apartment.name.ilike(f"%{filter}%"))
+    apartments = query.all()
+    return apartments
 
 
-@router.post("/", response_model=schemas.Apartment)
-async def create_apartment(apartment: schemas.ApartmentCreate, db: AsyncSession = Depends(database.get_db)):
-    db_apartment = models.Apartment(**apartment.dict())
-    db.add(db_apartment)
-    await db.commit()
-    await db.refresh(db_apartment)
-    return db_apartment
+@router.post("/")
+def create_apartment(apartment: ApartmentCreate, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
+    db.add(apartment)
+    db.commit()
+    db.refresh(apartment)
+    return {"message": "Apartment added", "apartment": apartment}
