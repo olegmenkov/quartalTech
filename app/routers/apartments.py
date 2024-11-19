@@ -1,27 +1,44 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query, HTTPException
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.auth import get_admin_user
-from app.models import Apartment
-from app.schemas import ApartmentResponse, ApartmentCreate
+from app.auth import get_current_user, get_admin_user
 from app.dependencies import get_db
+from app.services.filters import filter_apartments
+from app.schemas import ApartmentResponse, ApartmentFilter, ApartmentInfo
+from app.models import Apartment
 
 router = APIRouter()
 
 
-# Получить список квартир
 @router.get("/", response_model=list[ApartmentResponse])
-def list_apartments(filter: str = None, db: Session = Depends(get_db)):
-    query = db.query(Apartment)
-    if filter:
-        query = query.filter(Apartment.name.ilike(f"%{filter}%"))
-    apartments = query.all()
+def get_apartments(user: str = Depends(get_current_user),
+                   area_min: float = Query(None, description="Минимальная площадь"),
+                   area_max: float = Query(None, description="Максимальная площадь"),
+                   rooms_min: int = Query(None, description="Минимальное количество комнат"),
+                   rooms_max: int = Query(None, description="Максимальное количество комнат"),
+                   price_min: float = Query(None, description="Минимальная цена"),
+                   price_max: float = Query(None, description="Максимальная цена"),
+                   db: Session = Depends(get_db),
+                   ):
+    """
+    Получить список квартир с фильтрами. Фильтры могут быть применены по одному или нескольким полям.
+    """
+    apartments = filter_apartments(
+        db, area_min=area_min, area_max=area_max, rooms_min=rooms_min, rooms_max=rooms_max, price_min=price_min,
+        price_max=price_max
+    )
     return apartments
 
 
-@router.post("/")
-def create_apartment(apartment: ApartmentCreate, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
-    db.add(apartment)
-    db.commit()
-    db.refresh(apartment)
-    return {"message": "Apartment added", "apartment": apartment}
+@router.post("/", response_model=ApartmentResponse)
+def create_apartment(input: ApartmentInfo, User: str = Depends(get_admin_user), db: Session = Depends(get_db)):
+    new_apartment = Apartment(name=input.name,
+                              area=input.area,
+                              rooms=input.rooms,
+                              estimated_price=input.price)
+    db.add(new_apartment)
+    db.commit()  # Сохраняем изменения
+    db.refresh(new_apartment)  # Обновляем объект, чтобы получить значение id
+
+    return new_apartment

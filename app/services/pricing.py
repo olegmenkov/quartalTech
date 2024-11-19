@@ -1,3 +1,3 @@
-def calculate_price(apartment_id: int) -> dict:
+def calculate_price(area: float, rooms: int) -> float:
     # тут будет логика нейронки
-    return {"apartment_id": apartment_id, "price": apartment_id * 1000}
+    return 10_000_000

@@ -20,7 +20,7 @@ class User(Base):
 
 class Apartment(Base):
     __tablename__ = 'apartments'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
     area = Column(Float, nullable=False)
     rooms = Column(Integer, nullable=False)

@@ -1,0 +1,8 @@
+[run]
+omit =
+    */alembic/*
+    */python3/*
+    */tests/*
+    */__init__.py
+    *models.py
+    *schemas.py
