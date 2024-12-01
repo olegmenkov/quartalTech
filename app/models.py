@@ -25,3 +25,7 @@ class Apartment(Base):
     area = Column(Float, nullable=False)
     rooms = Column(Integer, nullable=False)
     estimated_price = Column(Float, nullable=False)
+    floor = Column(Integer, nullable=False)
+    total_floors = Column(Integer, nullable=False)
+    district = Column(String)
+    underground = Column(String)
