@@ -4,6 +4,10 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
+
+print("Current working directory:", os.getcwd())
+print("Python sys.path:", sys.path)
+
 from app.db_setup import Base
 
 
