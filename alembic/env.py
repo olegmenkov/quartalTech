@@ -4,6 +4,7 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 print("Current working directory:", os.getcwd())
 print("Python sys.path:", sys.path)
@@ -11,7 +12,6 @@ print("Python sys.path:", sys.path)
 from app.db_setup import Base
 
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # this is the Alembic Config object, which provides access to the values within the .ini file in use.
 config = context.config
