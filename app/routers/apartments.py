@@ -19,6 +19,12 @@ def get_apartments(user: str = Depends(get_current_user),
                    rooms_max: int = Query(None, description="Максимальное количество комнат"),
                    price_min: float = Query(None, description="Минимальная цена"),
                    price_max: float = Query(None, description="Максимальная цена"),
+                   floor_min: int = Query(None, description="Самый низкий этаж"),
+                   floor_max: int = Query(None, description="Самый высокий этаж"),
+                   total_floors_min: int = Query(None, description="Минимальное количество этажей в доме"),
+                   total_floors_max: int = Query(None, description="Максимальное количество этажей в доме"),
+                   district: str = Query(None, description="Район"),
+                   underground: str = Query(None, description="Станция метро"),
                    db: Session = Depends(get_db),
                    ):
     """
@@ -36,7 +42,12 @@ def create_apartment(input: ApartmentInfo, User: str = Depends(get_admin_user), 
     new_apartment = Apartment(name=input.name,
                               area=input.area,
                               rooms=input.rooms,
-                              estimated_price=input.price)
+                              estimated_price=input.price,
+                              floor=input.floor,
+                              total_floors=input.total_floors,
+                              district=input.district,
+                              underground=input.underground
+                            )
     db.add(new_apartment)
     db.commit()  # Сохраняем изменения
     db.refresh(new_apartment)  # Обновляем объект, чтобы получить значение id

@@ -33,6 +33,10 @@ class ApartmentInfo(BaseModel):
     area: float
     rooms: int
     price: float
+    floor: int
+    total_floors: int
+    district: str
+    underground: str
 
 
 class ApartmentFilter(BaseModel):
@@ -42,6 +46,12 @@ class ApartmentFilter(BaseModel):
     rooms_max: Optional[int] = None
     price_min: Optional[float] = None
     price_max: Optional[float] = None
+    floor_min: Optional[int] = None
+    floor_max: Optional[int] = None
+    total_floors_min: Optional[int] = None
+    total_floors_max: Optional[int] = None
+    district: Optional[str] = None
+    underground: Optional[str] = None
 
 
 class ApartmentResponse(BaseModel):
@@ -50,6 +60,10 @@ class ApartmentResponse(BaseModel):
     area: float
     rooms: int
     estimated_price: float
+    floor: int
+    total_floors: int
+    district: str
+    underground: str
 
     class Config:
         from_attributes = True
