@@ -38,6 +38,19 @@ services:
     volumes:
       - test_db_data:/var/lib/postgresql/data
 
-volumes:
-  db_data:
-  test_db_data:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "8080:80" # Проброс порта для доступа к фронтенду
+    depends_on:
+      - app
+    restart: always
+    networks:
+      - quartaltech_network
+
+networks:
+  quartaltech_network:
+    driver: bridge
