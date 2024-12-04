@@ -46,7 +46,10 @@ def create_apartment(input: ApartmentInfo, User: str = Depends(get_admin_user), 
                               floor=input.floor,
                               total_floors=input.total_floors,
                               district=input.district,
-                              underground=input.underground
+                              underground=input.underground,
+                              fio=input.fio,
+                              phone=input.phone,
+                              email=input.email,
                             )
     db.add(new_apartment)
     db.commit()  # Сохраняем изменения
