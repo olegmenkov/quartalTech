@@ -47,7 +47,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 # Логин пользователя и получение токена
 @router.post("/login")
 def login(
-    input: UserLogin, db: Session = Depends(get_db)
+        input: UserLogin, db: Session = Depends(get_db)
 ):
     # Проверяем, существует ли пользователь
     result = db.execute(select(User).where(User.username == input.username))
@@ -73,3 +73,25 @@ def user(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
                 "role": user.role}
     else:
         raise HTTPException(status_code=404, detail="User not found")
+
+
+@router.put("/{user_id}")
+def update_user(
+        user_id: int,
+        user_data: dict,
+        current_user: User = Depends(get_current_user),
+        db: Session = Depends(get_db)
+):
+    if current_user.id != user_id and current_user.role != UserRole.ADMIN:
+        raise HTTPException(status_code=403, detail="Not authorized to update this user")
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    if 'password' in user_data and user_data['password']:
+        user.hashed_password = bcrypt.hash(user_data['password'])
+
+    db.commit()
+    db.refresh(user)
+    return {"message": "User updated successfully"}

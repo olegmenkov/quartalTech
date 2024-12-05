@@ -1,25 +1,31 @@
 <!-- src/components/RegisterForm.vue -->
 <template>
-  <div class="register-form">
-    <h2>Регистрация</h2>
-    <form @submit.prevent="registerUser">
-      <label>Логин:</label>
-      <input v-model="username" required />
-
-      <label>Пароль:</label>
-      <input v-model="password" type="password" required />
-
-      <label>Повторите пароль:</label>
-      <input v-model="password2" type="password" required />
-
-      <label>Секретный ключ администратора:</label>
-      <input v-model="admin_key" type="password" />
-
-      <button type="submit">Зарегистрироваться</button>
-    </form>
-    <p>
-      <router-link to="/login">Уже есть аккаунт? Войти</router-link>
-    </p>
+  <div class="register-page">
+    <div class="register-form">
+      <h2>Регистрация</h2>
+      <form @submit.prevent="registerUser">
+        <div class="form-group">
+          <label for="username">Логин:</label>
+          <input id="username" v-model="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль:</label>
+          <input id="password" v-model="password" type="password" required />
+        </div>
+        <div class="form-group">
+          <label for="password2">Повторите пароль:</label>
+          <input id="password2" v-model="password2" type="password" required />
+        </div>
+        <div class="form-group">
+          <label for="admin_key">Секретный ключ администратора:</label>
+          <input id="admin_key" v-model="admin_key" type="password" />
+        </div>
+        <button type="submit" class="btn">Зарегистрироваться</button>
+      </form>
+      <p class="login-link">
+        Уже есть аккаунт? <router-link to="/login">Войти</router-link>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -51,13 +57,13 @@ export default {
 
       this.register(userData)
         .then(() => {
-          // Registration successful, redirect to login
+          // Регистрация прошла успешно, перенаправление на страницу входа
           alert('Регистрация прошла успешно');
           this.$router.push('/login');
         })
         .catch(error => {
           console.error(error);
-          // Handle error, show message
+          // Обработка ошибки, отображение сообщения
           if (error.response && error.response.data.detail) {
             alert(`Ошибка регистрации: ${error.response.data.detail}`);
           } else {
@@ -70,23 +76,80 @@ export default {
 </script>
 
 <style scoped>
-/* Add styles for the registration form */
+/* Стили для страницы регистрации */
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px); /* Вычитание высоты хедера */
+  background-color: #ecf0f1;
+}
+
 .register-form {
-  max-width: 400px;
-  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.register-form label {
+
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
   display: block;
-  margin-top: 10px;
+  color: #34495e;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
-.register-form input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-.register-form button {
-  margin-top: 20px;
+
+.form-group input {
   width: 100%;
   padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: #1abc9c;
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #1abc9c;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #16a085;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #34495e;
+}
+
+.login-link a {
+  color: #1abc9c;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
 }
 </style>

@@ -1,16 +1,18 @@
 <!-- src/components/ApartmentTable.vue -->
 <template>
-  <div>
-    <table>
+  <div class="apartment-table-container">
+    <table class="apartment-table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Area</th>
-          <th>Rooms</th>
-          <th>Price</th>
-          <th>Floor</th>
-          <th>District</th>
-          <!-- Add more columns as needed -->
+          <th>Название</th>
+          <th>Площадь (м²)</th>
+          <th>Комнат</th>
+          <th>Цена (₽)</th>
+          <th>Этаж</th>
+          <th>Этажей в доме</th>
+          <th>Район</th>
+          <th>Метро</th>
+          <!-- Добавьте дополнительные столбцы по необходимости -->
         </tr>
       </thead>
       <tbody>
@@ -19,13 +21,15 @@
           <td>{{ apartment.area }}</td>
           <td>{{ apartment.rooms }}</td>
           <td>{{ apartment.estimated_price }}</td>
-          <td>{{ apartment.floor }}/{{ apartment.total_floors }}</td>
+          <td>{{ apartment.floor }}</td>
+          <td>{{ apartment.total_floors }}</td>
           <td>{{ apartment.district }}</td>
-          <!-- Add more data as needed -->
+          <td>{{ apartment.underground }}</td>
+          <!-- Отобразите дополнительные данные по необходимости -->
         </tr>
       </tbody>
     </table>
-    <!-- Pagination controls could be added here -->
+    <!-- Элементы управления пагинацией могут быть добавлены здесь -->
     <EditApartment v-if="showEdit" :apartment="selectedApartment" @close="closeEdit" />
   </div>
 </template>
@@ -57,7 +61,7 @@ export default {
     closeEdit() {
       this.showEdit = false;
       this.selectedApartment = null;
-      // Refresh the apartments list
+      // Обновляем список квартир
       this.$store.dispatch('fetchApartments');
     }
   }
@@ -65,5 +69,31 @@ export default {
 </script>
 
 <style scoped>
-/* Add styles for the table */
+/* Стили для таблицы */
+.apartment-table-container {
+  overflow-x: auto;
+}
+
+.apartment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.apartment-table th,
+.apartment-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.apartment-table th {
+  background-color: #f2f2f2;
+  color: #2c3e50;
+  text-align: left;
+}
+
+.apartment-table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
 </style>

@@ -13,18 +13,27 @@ export default new Vuex.Store({
     user: null,
     apartments: [],
     filters: {},
-    isAdmin: false
+    isAdmin: false,
+    fio: '',
+    phone: '',
+    email: ''
   },
   mutations: {
     AUTH_SUCCESS(state, { token, user }) {
       state.token = token;
       state.user = user;
       state.isAdmin = user.role === 'admin';
+      state.fio = user.fio;
+      state.phone = user.phone;
+      state.email = user.email;
     },
     AUTH_LOGOUT(state) {
       state.token = '';
       state.user = null;
       state.isAdmin = false;
+      state.fio = '';
+      state.phone = '';
+      state.email = '';
     },
     SET_APARTMENTS(state, apartments) {
       state.apartments = apartments;
@@ -37,7 +46,6 @@ export default new Vuex.Store({
     login({ commit }, userData) {
       return axios.post(`${backendUrl}/users/login`, userData)
         .then(response => {
-          console.log(response)
           const token = response.data.access_token;
           const userId = response.data.id;
 
@@ -73,6 +81,14 @@ export default new Vuex.Store({
       return axios.post(`${backendUrl}/apartments/`, apartmentData)
         .then(() => {
           dispatch('fetchApartments');
+        });
+    },
+    changeUserData({ commit }, { user_id, userData }) {
+      console.log(user_id)
+      console.log(userData)
+      return axios.put(`${backendUrl}/users/${user_id}`, userData)
+        .then(() => {
+          // Registration successful, redirect to login
         });
     }
   },
