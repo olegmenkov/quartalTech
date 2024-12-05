@@ -1,35 +1,29 @@
-# Стадия сборки
-FROM node:16 as build
+# Stage 1: Build the Vue.js application
+FROM node:16-alpine AS build-stage
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем зависимости
+# Copy package.json and package-lock.json if available
 COPY package*.json ./
 
-# Устанавливаем зависимости, включая devDependencies
+# Install dependencies
 RUN npm install
 
-# Устанавливаем отсутствующий парсер ESLint
-RUN npm install --save-dev @babel/eslint-parser \
-npm install cors
-# Копируем все файлы проекта
+# Copy the rest of the application code
 COPY . .
 
-# Сборка проекта
+# Build the application
 RUN npm run build
 
-# Стадия сервера
-FROM nginx:stable-alpine
+# Stage 2: Serve the built files using nginx
+FROM nginx:stable-alpine AS production-stage
 
-# Копируем собранный фронтенд в директорию Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy the built files from the previous stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# Копируем кастомную конфигурацию Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx configuration if needed
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Экспонируем порт
 EXPOSE 80
 
-# Запуск Nginx
 CMD ["nginx", "-g", "daemon off;"]

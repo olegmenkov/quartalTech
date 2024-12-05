@@ -1,60 +1,85 @@
-import { createStore } from "vuex";
-import axios from "axios";
+// src/store/index.js
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
 
-export const store = createStore({
+Vue.use(Vuex);
+
+const backendUrl = process.env.VUE_APP_BACKEND_URL || 'http://localhost:8000';
+
+export default new Vuex.Store({
   state: {
+    token: localStorage.getItem('token') || '',
     user: null,
-    token: localStorage.getItem("token") || null,
+    apartments: [],
+    filters: {},
+    isAdmin: false
   },
   mutations: {
-    setUser(state, user) {
-      state.user = user;
-    },
-    setToken(state, token) {
+    AUTH_SUCCESS(state, { token, user }) {
       state.token = token;
-      localStorage.setItem("token", token);
+      state.user = user;
+      state.isAdmin = user.role === 'admin';
     },
-    clearAuth(state) {
+    AUTH_LOGOUT(state) {
+      state.token = '';
       state.user = null;
-      state.token = null;
-      localStorage.removeItem("token");
+      state.isAdmin = false;
     },
+    SET_APARTMENTS(state, apartments) {
+      state.apartments = apartments;
+    },
+    SET_FILTERS(state, filters) {
+      state.filters = filters;
+    }
   },
   actions: {
-    async login({ commit }, { username, password }) {
-      try {
-        const response = await axios.post("http://localhost:8000/users/login", {
-          username,
-          password,
+    login({ commit }, userData) {
+      return axios.post(`${backendUrl}/users/login`, userData)
+        .then(response => {
+          console.log(response)
+          const token = response.data.access_token;
+          const userId = response.data.id;
+
+          localStorage.setItem('token', token);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+          return axios.get(`${backendUrl}/users/`, { headers: { Authorization: `Bearer ${token}` } })
+            .then(res => {
+              const user = res.data;
+              commit('AUTH_SUCCESS', { token, user });
+            });
         });
-        commit("setToken", response.data.access_token);
-        commit("setUser", { id: response.data.id, username });
-        return response.data;
-      } catch (err) {
-        throw err.response?.data?.detail || "Ошибка при авторизации.";
-      }
     },
-    async fetchUser({ commit, state }) {
-      try {
-        if (!state.token) return;
-        const response = await axios.get("http://localhost:8000/users/", {
-          headers: { Authorization: `Bearer ${state.token}` },
+    register({ commit }, userData) {
+      return axios.post(`${backendUrl}/users/`, userData)
+        .then(() => {
+          // Registration successful, redirect to login
         });
-        commit("setUser", response.data);
-      } catch (err) {
-        commit("clearAuth");
-      }
     },
     logout({ commit }) {
-      commit("clearAuth");
+      commit('AUTH_LOGOUT');
+      localStorage.removeItem('token');
+      delete axios.defaults.headers.common['Authorization'];
     },
+    fetchApartments({ commit }, filters = {}) {
+      let params = new URLSearchParams(filters).toString();
+      return axios.get(`${backendUrl}/apartments/?${params}`)
+        .then(response => {
+          commit('SET_APARTMENTS', response.data);
+        });
+    },
+    createApartment({ dispatch }, apartmentData) {
+      return axios.post(`${backendUrl}/apartments/`, apartmentData)
+        .then(() => {
+          dispatch('fetchApartments');
+        });
+    }
   },
   getters: {
-    isAuthenticated(state) {
-      return !!state.token;
-    },
-    getUser(state) {
-      return state.user;
-    },
-  },
+    isLoggedIn: state => !!state.token,
+    isAdmin: state => state.isAdmin,
+    apartments: state => state.apartments,
+    filters: state => state.filters
+  }
 });
