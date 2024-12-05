@@ -67,6 +67,10 @@ class ApartmentResponse(BaseModel):
     total_floors: int
     district: str
     underground: str
+    fio: str
+    phone: str
+    email: str
 
     class Config:
         from_attributes = True
+        orm_mode = True
