@@ -9,3 +9,4 @@ python-jose
 python-multipart
 joblib
 numpy
+scikit-learn
