@@ -11,7 +11,7 @@ services:
       - ./frontend:/app
       - /app/node_modules
     environment:
-      - VUE_APP_BACKEND_URL=http://localhost:8000
+      - VUE_APP_BACKEND_URL=https://direct-lionfish-vaguely.ngrok-free.app
     depends_on:
       - app
 

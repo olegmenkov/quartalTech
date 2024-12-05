@@ -1,4 +1,9 @@
+from urllib.request import Request
+
 from fastapi import FastAPI
+from fastapi.exceptions import ResponseValidationError
+from starlette.responses import JSONResponse
+
 from app.routers import apartments, users, analytics, calculations
 from fastapi.middleware.cors import CORSMiddleware
 

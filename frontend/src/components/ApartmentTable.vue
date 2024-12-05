@@ -12,11 +12,17 @@
           <th>Этажей в доме</th>
           <th>Район</th>
           <th>Метро</th>
-          <!-- Добавьте дополнительные столбцы по необходимости -->
+          <th>ФИО</th>
+          <th>Телефон</th>
+          <th>Email</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="apartment in apartments" :key="apartment.id" @click="selectApartment(apartment)">
+        <tr
+          v-for="apartment in apartments"
+          :key="apartment.id"
+          @click="selectApartment(apartment)"
+        >
           <td>{{ apartment.name }}</td>
           <td>{{ apartment.area }}</td>
           <td>{{ apartment.rooms }}</td>
@@ -25,12 +31,18 @@
           <td>{{ apartment.total_floors }}</td>
           <td>{{ apartment.district }}</td>
           <td>{{ apartment.underground }}</td>
-          <!-- Отобразите дополнительные данные по необходимости -->
+          <td>{{ apartment.fio }}</td>
+          <td>{{ apartment.phone }}</td>
+          <td>{{ apartment.email }}</td>
         </tr>
       </tbody>
     </table>
     <!-- Элементы управления пагинацией могут быть добавлены здесь -->
-    <EditApartment v-if="showEdit" :apartment="selectedApartment" @close="closeEdit" />
+    <EditApartment
+      v-if="showEdit"
+      :apartment="selectedApartment"
+      @close="closeEdit"
+    />
   </div>
 </template>
 
@@ -40,16 +52,16 @@ import EditApartment from './EditApartment.vue';
 
 export default {
   components: {
-    EditApartment
+    EditApartment,
   },
   data() {
     return {
       selectedApartment: null,
-      showEdit: false
+      showEdit: false,
     };
   },
   computed: {
-    ...mapGetters(['apartments', 'isAdmin'])
+    ...mapGetters(['apartments', 'isAdmin']),
   },
   methods: {
     selectApartment(apartment) {
@@ -63,8 +75,12 @@ export default {
       this.selectedApartment = null;
       // Обновляем список квартир
       this.$store.dispatch('fetchApartments');
-    }
-  }
+    },
+  },
+  created() {
+    // Загружаем объявления при инициализации компонента
+    this.$store.dispatch('fetchApartments');
+  },
 };
 </script>
 
