@@ -1,6 +1,10 @@
-from fastapi import APIRouter, Depends, Query, HTTPException
+import logging
+
+from fastapi import APIRouter, Depends, Query, HTTPException, Request
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 
 from app.auth import get_current_user, get_admin_user
 from app.dependencies import get_db
@@ -32,9 +36,12 @@ def get_apartments(user: str = Depends(get_current_user),
     """
     apartments = filter_apartments(
         db, area_min=area_min, area_max=area_max, rooms_min=rooms_min, rooms_max=rooms_max, price_min=price_min,
-        price_max=price_max
+        price_max=price_max, floor_max=floor_max, floor_min=floor_min, total_floors_min=total_floors_min, total_floors_max=total_floors_max,
+        district=district, underground=underground
     )
     return apartments
+
+
 
 
 @router.post("/", response_model=ApartmentResponse)
@@ -54,5 +61,4 @@ def create_apartment(input: ApartmentInfo, User: str = Depends(get_admin_user), 
     db.add(new_apartment)
     db.commit()  # Сохраняем изменения
     db.refresh(new_apartment)  # Обновляем объект, чтобы получить значение id
-
     return new_apartment
