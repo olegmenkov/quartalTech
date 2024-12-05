@@ -37,6 +37,9 @@ class ApartmentInfo(BaseModel):
     total_floors: int
     district: str
     underground: str
+    fio: str
+    phone: str
+    email: str
 
 
 class ApartmentFilter(BaseModel):

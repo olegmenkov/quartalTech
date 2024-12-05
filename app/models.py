@@ -29,3 +29,6 @@ class Apartment(Base):
     total_floors = Column(Integer, nullable=False)
     district = Column(String)
     underground = Column(String)
+    fio = Column(String)
+    phone = Column(String)
+    email = Column(String)

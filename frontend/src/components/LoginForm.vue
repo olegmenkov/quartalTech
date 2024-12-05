@@ -1,19 +1,23 @@
 <!-- src/components/LoginForm.vue -->
 <template>
-  <div class="login-form">
-    <h2>Вход</h2>
-    <form @submit.prevent="loginUser">
-      <label>Логин:</label>
-      <input v-model="username" required />
-
-      <label>Пароль:</label>
-      <input v-model="password" type="password" required />
-
-      <button type="submit">Войти</button>
-    </form>
-    <p>
-      <router-link to="/register">Нет аккаунта? Зарегистрируйтесь</router-link>
-    </p>
+  <div class="login-page">
+    <div class="login-form">
+      <h2>Вход в аккаунт</h2>
+      <form @submit.prevent="loginUser">
+        <div class="form-group">
+          <label for="username">Логин:</label>
+          <input id="username" v-model="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль:</label>
+          <input id="password" v-model="password" type="password" required />
+        </div>
+        <button type="submit" class="btn">Войти</button>
+      </form>
+      <p class="register-link">
+        Нет аккаунта? <router-link to="/register">Зарегистрируйтесь</router-link>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -36,12 +40,12 @@ export default {
       };
 
       this.login(userData)
-        .then(response => {
+        .then(() => {
           this.$router.push('/');
         })
         .catch(error => {
           console.error(error);
-          // Handle error, show message
+          // Обработка ошибок и отображение сообщения
           if (error.response && error.response.data.detail) {
             alert(`Ошибка входа: ${error.response.data.detail}`);
           } else {
@@ -54,23 +58,80 @@ export default {
 </script>
 
 <style scoped>
-/* Add styles for the login form */
+/* Стили для страницы входа */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px); /* Вычитание высоты хедера */
+  background-color: #ecf0f1;
+}
+
 .login-form {
-  max-width: 400px;
-  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.login-form label {
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
   display: block;
-  margin-top: 10px;
+  color: #34495e;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
-.login-form input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-.login-form button {
-  margin-top: 20px;
+
+.form-group input {
   width: 100%;
   padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: #1abc9c;
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #1abc9c;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #16a085;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #34495e;
+}
+
+.register-link a {
+  color: #1abc9c;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
 }
 </style>

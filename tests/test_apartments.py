@@ -28,7 +28,8 @@ def test_create_apartment_admin(setup_test_db):
     # Создаём квартиру
     response = client.post(
         "/apartments/",
-        json={"name": "Test Apartment", "area": 50.5, "rooms": 2, "price": 100000.0, "floor": 4, "total_floors": 10, "district": "Аэропорт", "underground": "Аэропорт"},
+        json={"name": "Test Apartment", "area": 50.5, "rooms": 2, "price": 100000.0, "floor": 4, "total_floors": 10, "district": "Аэропорт", "underground": "Аэропорт",
+              "fio": "Иванов Иван Иванович", "phone": "+79182637543", "email": "ivanov@mail.com"},
         headers=headers,
     )
     assert response.status_code == 200
