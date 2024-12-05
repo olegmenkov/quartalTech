@@ -1,8 +1,8 @@
 def calculate_price(area, rooms, floor, total_floors, district, underground) -> float:
-    scaler_path='data/scaler.pkl'
-    model_path='data/model.pkl'
-    district_clusters_path='data/district_clusters.pkl'
-    underground_clusters_path='data/underground_clusters.pkl'
+    scaler_path='/datascaler.pkl'
+    model_path='/model.pkl'
+    district_clusters_path='/district_clusters.pkl'
+    underground_clusters_path='/underground_clusters.pkl'
     """
     Функция для предсказания стоимости квартиры.
 

@@ -8,5 +8,4 @@ alembic==1.10.1
 python-jose
 python-multipart
 joblib
-pickle
 numpy
