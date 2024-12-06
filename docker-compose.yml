@@ -1,6 +1,20 @@
 version: "3.3"
 
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VUE_APP_BACKEND_URL=https://direct-lionfish-vaguely.ngrok-free.app
+    depends_on:
+      - app
+
   app:
     build: .
     container_name: app
@@ -39,6 +53,10 @@ services:
     volumes:
       - ./dumps:/dumps
       - test_db_data:/var/lib/postgresql/data
+
+networks:
+  quartaltech_network:
+    driver: bridge
 
 volumes:
   db_data:

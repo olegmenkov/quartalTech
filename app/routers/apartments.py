@@ -16,8 +16,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=list[ApartmentResponse])
-def get_apartments(user: str = Depends(get_current_user),
-                   area_min: float = Query(None, description="Минимальная площадь"),
+def get_apartments(area_min: float = Query(None, description="Минимальная площадь"),
                    area_max: float = Query(None, description="Максимальная площадь"),
                    rooms_min: int = Query(None, description="Минимальное количество комнат"),
                    rooms_max: int = Query(None, description="Максимальное количество комнат"),
