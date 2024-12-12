@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
   app:
@@ -24,6 +24,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      - ./dumps:/dumps
       - db_data:/var/lib/postgresql/data
 
   test_db:
@@ -36,6 +37,7 @@ services:
     ports:
       - "5433:5432"
     volumes:
+      - ./dumps:/dumps
       - test_db_data:/var/lib/postgresql/data
 
 volumes:
